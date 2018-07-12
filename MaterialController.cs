@@ -346,13 +346,11 @@ namespace BridgeServer_WebClient.Controllers
             Guid materialUUID = vm.Material.ID;
             Material material = db.Materials.Find(materialUUID);
             logger.Info(material.Identifier);
-            foreach (MaterialEvent e in material.Events.ToArray())
-            {
-                db.MaterialEvents.Remove(e);
-            }
+            
+            //material.Events.Clear();
             material.Devices.Clear();
             material.enabled = false;
-            db.Materials.Remove(material);
+            //db.Materials.Remove(material);
             db.SaveChanges();
 
             //db.Entry(material).Reload();
